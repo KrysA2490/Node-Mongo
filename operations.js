@@ -1,38 +1,25 @@
-const assert = require('assert').strict;
 
 //CRUD Create
-exports.insertDocument = (db, document, collection, callback) => {
+exports.insertDocument = (db, document, collection) => {
     const coll = db.collection(collection);
-    coll.insertOne(document, (err, result) => {
-        assert.strictEqual(err, null);
-        callback(result);
-    });
+    return coll.insertOne(document);
 };
 
 //CRUD Read
-exports.findDocuments = (db, collection, callback) => {
+exports.findDocuments = (db, collection) => {
     const coll = db.collection(collection);
-    coll.find().toArray((err, docs) => {
-        assert.strictEqual(err, null);
-        callback(docs);
-    })
+    return coll.find().toArray();
 };
 
 //CRUD Delete
-exports.removeDocument = (db, document, collection, callback) => {
+exports.removeDocument = (db, document, collection) => {
     const coll = db.collection(collection);
-    coll.deleteOne(document, (err, result) => {
-        assert.strictEqual(err, null);
-        callback(result);
-    });
+    return coll.deleteOne( document );
 };
 
 //CRUD Update
-exports.updateDocument = (db, document, update, collection, callback) => {
+exports.updateDocument = (db, document, update, collection) => {
     const coll = db.collection(collection);
-    coll.updateOne(document, { $set: update }, null, (err, result) => {
-        assert.strictEqual(err,null);
-        callback(result);
-    });
+    return coll.updateOne(document, { $set: update }, null);
 };
 
